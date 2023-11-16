@@ -30,7 +30,7 @@ npx expo start
 
 Once the development server is running, it will looks like something like this:
 
-![](https://ibb.co/WHJfSSv)
+![](https://media.licdn.com/dms/image/D4D22AQGbm-7VU1_twg/feedshare-shrink_2048_1536/0/1689755825376?e=1703116800&v=beta&t=XMQIQ8JAcV9nyPlBENerEqwj_ojsvjOpOHQd8C-LkyI)
 
 The easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project#open-the-app-on-your-device).
 
