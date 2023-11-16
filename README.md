@@ -1,48 +1,62 @@
 # Final-Project-UI-UX
 
-## Available Scripts
+## Requriements
 
-If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
+To use Expo, you need to have the following tools installed on your machine:
 
-### `npm start`
+- [Node.js LTS Release](https://nodejs.org/en/) - Only Node.js LTS releases (even-numbered) are recommended.
 
-Runs your app in development mode.
+  As Node.js [officially states](https://nodejs.org/en/about/releases/), "Production applications should only use Active LTS or Maintenance LTS releases". You can install Node.js using a version management tool (such as `nvm` or `volta` or any other of your choice) to switch between different Node.js versions.
 
-Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
+- [Git](https://git-scm.com/) for source control.
 
-Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the `--reset-cache` flag to the start script:
+## Get Started
+
+### Installing Expo CLI
+
+Use `npm` to isntall the Expo CLI command line utility:
 
 ```
-npm start --reset-cache
-# or
-yarn start --reset-cache
+npm install -g expo-cli
 ```
 
-#### `npm test`
+### Running the app
 
-Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
+In the project directory, run the following command to start a development server from the terminal:
 
-#### `npm run ios`
+```
+npx expo start
+```
 
-Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
+Once the development server is running, it will looks like something like this:
 
-#### `npm run android`
+![](https://ibb.co/WHJfSSv)
 
-Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of `adb` available to Create React Native App:
+The easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project#open-the-app-on-your-device).
 
-##### Using Android Studio's `adb`
+Once it is running on all platforms, the project should look like this:
 
-1. Make sure that you can run adb from your terminal.
-2. Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
+![](https://docs.expo.dev/static/images/tutorial/01-app-running-on-all-platforms.jpg)
 
-##### Using Genymotion's `adb`
+The text displayed on the app's screen above can be found in the **App.js** file which is at the root of the project's directory. It is the entry point of the project and is executed when the development server starts.
 
-1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
-2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
-3. Make sure that you can run adb from your terminal.
+## Install Expo Go on your device (optional)
 
-#### `npm run eject`
+It is availabe on both the Android Play Store and iOS App Store.
 
-This will start the process of "ejecting" from Create React Native App's build scripts. You'll be asked a couple of questions about how you'd like to build your project.
+- [Android Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) - Android Lollipop (5) or greater
+- [iOS App Store](https://apps.apple.com/app/expo-go/id982107779) - iOS 13 or greater
 
-**Warning:** Running eject is a permanent action (aside from whatever version control system you use). An ejected app will require you to have an [Xcode and/or Android Studio environment](https://facebook.github.io/react-native/docs/getting-started.html) set up.
+When you run `npx expo start` in your project, [Expo CLI](https://docs.expo.dev/more/expo-cli/) starts a [development server](https://docs.expo.dev/more/expo-cli/#develop) and generates a QR code as shown. 
+
+- On your Android device, press **Scan QR Code** on the **Home** tab of the Expo Go app and scan the QR code you see in the terminal.
+- On your iPhone or iPad, open the default Apple **Camera** app and scan the QR code you see in the terminal.
+
+You can open the project on multiple devices simultaneously. Go ahead and try it on both phones at the same time if you have them handy.
+
+## Using an emulator or simulator
+
+If you are using an emulator/simulator, you may find the following Expo CLI keyboard shortcuts to be useful to open the app on any of the following platforms:
+- Pressing `a` will open [Android Emulator or connected device](https://docs.expo.dev/workflow/android-studio-emulator).
+- Pressing `i` will open in an [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator).
+- Pressing `w` will open in a [web browser](https://docs.expo.dev/workflow/web).
