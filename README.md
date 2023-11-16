@@ -14,7 +14,7 @@ To use Expo, you need to have the following tools installed on your machine:
 
 ### Installing Expo CLI
 
-Use `npm` to isntall the Expo CLI command line utility:
+Use `npm` to install the Expo CLI command line utility:
 
 ```
 npm install -g expo-cli
@@ -30,7 +30,7 @@ npx expo start
 
 Once the development server is running, it will looks like something like this:
 
-![](https://media.licdn.com/dms/image/D4D22AQGbm-7VU1_twg/feedshare-shrink_2048_1536/0/1689755825376?e=1703116800&v=beta&t=XMQIQ8JAcV9nyPlBENerEqwj_ojsvjOpOHQd8C-LkyI)
+![](https://fullstackopen.com/static/e62bb0656434a7653cc59a0a4f720d62/5a190/25new.png)
 
 The easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project#open-the-app-on-your-device).
 
