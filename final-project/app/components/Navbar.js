@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 import HomePage from "../screens/HomePage";
 import ReportPage from "../screens/ReportPage";
@@ -29,19 +29,19 @@ export default function Navbar() {
           tabBarStyle: {
             height: 56,
             position: "absolute",
-            padding: 10,
+            padding: 8,
             backgroundColor: "#FFFFFF",
           },
 
           tabBarIcon: ({ color }) => {
-            let iconName;
             let rn = route.name;
 
-            if (rn === homeName) iconName = "home";
-            else if (rn === reportName) iconName = "pie-chart";
-            else if (rn === profileName) iconName = "user-circle";
-
-            return <FontAwesome name={iconName} size={22} color={color} />;
+            if (rn === homeName)
+              return <FontAwesome name="home" size={22} color={color} />;
+            else if (rn === reportName)
+              return <FontAwesome name="pie-chart" size={20} color={color} />;
+            else
+              return <Ionicons name="person-circle" size={25} color={color} />;
           },
         })}
       >
