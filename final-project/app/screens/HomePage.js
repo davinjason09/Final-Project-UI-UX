@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet, View } from "react-native";
+import QuickAccess from "../components/QuickAccess";
 
 export default function HomePage() {
   return (
-    <View style={styles.container}>
-      <Text>Home Page</Text>
+    <View style={styles.base}>
+      <QuickAccess />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  base: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#F7F8F9",
   },
 });
