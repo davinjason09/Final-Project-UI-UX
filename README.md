@@ -1,6 +1,6 @@
 # Final-Project-UI-UX
 
-## Requriements
+## Requirements
 
 To use Expo, you need to have the following tools installed on your machine:
 
@@ -10,21 +10,51 @@ To use Expo, you need to have the following tools installed on your machine:
 
 - [Git](https://git-scm.com/) for source control.
 
-## Get Started
+## Getting Started
 
 ### Installing Expo CLI
 
 Use `npm` to install the Expo CLI command line utility:
 
-```
+```sh
 npm install -g expo-cli
 ```
 
-### Running the app
+### Cloning the Repository
+
+1. Navigate to the directory you would like to clone the repository into using commands like:
+    - `cd`: to change your working directory
+    - 'cd ..': to "go back" a level in your directory tree 
+2. Next, clone the remote repository and create a local copy on your machine using this command:
+
+   ```sh
+   git clone https://github.com/davinjason09/Final-Project-UI-UX
+   ```
+
+3. Now you can see the contents of the remote repository on your machine by moving into the newly cloned directory:
+   
+   ```sh
+   cd Final-Project-UI-UX
+
+   # For Windows
+   dir
+
+   # For MacOS and Linux
+   ls -l
+
+### Installing Dependencies
+
+In the project directory, run this following command to install all the dependencies needed from the terminal"
+
+```sh
+npm install
+```
+
+### Running the App
 
 In the project directory, run the following command to start a development server from the terminal:
 
-```
+```sh
 npx expo start
 ```
 
