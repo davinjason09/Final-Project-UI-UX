@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
+import { registerRootComponent } from "expo";
 
 import Navbar from "./app/components/Navbar";
 
@@ -18,3 +19,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+registerRootComponent(App);
