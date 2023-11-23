@@ -7,7 +7,7 @@ export default function AddIncome() {
     <View style={styles.base}>
       <View style={{ marginTop: 38 }}>
         <View style={styles.inputBox}>
-          <Text style={{ fontSize: 14, fontWeight: 400, marginLeft: 25 }}>
+          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
             Date
           </Text>
           <TextInput
@@ -17,7 +17,7 @@ export default function AddIncome() {
           ></TextInput>
         </View>
         <View style={styles.inputBox}>
-          <Text style={{ fontSize: 14, fontWeight: 400, marginLeft: 25 }}>
+          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
             Account
           </Text>
           <TextInput
@@ -27,7 +27,7 @@ export default function AddIncome() {
           ></TextInput>
         </View>
         <View style={styles.inputBox}>
-          <Text style={{ fontSize: 14, fontWeight: 400, marginLeft: 25 }}>
+          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
             Amount
           </Text>
           <TextInput
@@ -37,7 +37,7 @@ export default function AddIncome() {
           ></TextInput>
         </View>
         <View style={styles.inputBox}>
-          <Text style={{ fontSize: 14, fontWeight: 400, marginLeft: 25 }}>
+          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
             Note
           </Text>
           <TextInput
