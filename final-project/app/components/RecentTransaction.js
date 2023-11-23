@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 export default function RecentTransaction() {
@@ -20,12 +20,14 @@ export default function RecentTransaction() {
         <Text style={{ fontSize: 20, fontWeight: 500 }}>
           Recent Transactions
         </Text>
-        <Text
-          style={{ fontSize: 14, fontWeight: 500, color: "#2340DC" }}
-          onPress={() => nav.navigate("Transaction Details")}
-        >
-          Show all
-        </Text>
+        <TouchableOpacity>
+          <Text
+            style={{ fontSize: 14, fontWeight: 500, color: "#2340DC" }}
+            onPress={() => nav.navigate("Transaction Details")}
+          >
+            Show all
+          </Text>
+        </TouchableOpacity>
       </View>
       {/* <FlatList ListEmptyComponent={EmptyListMessage} /> */}
     </View>
