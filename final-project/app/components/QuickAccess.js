@@ -5,7 +5,6 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import DropShadow from "react-native-drop-shadow";
 
 export default function QuickAccess() {
   let balance = 707000;
