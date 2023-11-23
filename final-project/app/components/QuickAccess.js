@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   Ionicons,
   FontAwesome,
@@ -7,39 +8,57 @@ import {
 } from "@expo/vector-icons";
 
 export default function QuickAccess() {
+  const nav = useNavigation();
+
   let balance = 707000;
   let formattedBalance =
     balance.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ",00-";
 
   return (
-    <View style={styles.greeting}>
-      <Text style={[styles.greetingText, { fontSize: 13 }]}>Good Morning</Text>
-      <Text style={[styles.greetingText, { fontSize: 16 }]}>John Doe</Text>
-      <View style={styles.infoBox}>
-        <View style={styles.walletInfo}>
-          <Ionicons
-            name="md-wallet"
-            size={24}
-            color="#FFA91A"
-            style={{ marginRight: 10 }}
-          />
-          <Text style={{ fontSize: 15 }}>Your Balance</Text>
-        </View>
-        <Text style={{ fontSize: 24, left: 37, top: 24 }}>
-          Rp {formattedBalance}
+    <View style={{ height: 349 }}>
+      <View style={styles.greeting}>
+        <Text style={[styles.greetingText, { fontSize: 13, fontWeight: 400 }]}>
+          Good Morning
         </Text>
-        <View style={styles.button}>
-          <View>
-            <TouchableOpacity style={styles.addIncome}>
-              <MaterialCommunityIcons name="sack" size={43} color="#FFA91A" />
-            </TouchableOpacity>
-            <Text style={styles.buttonLabel}>Add Income</Text>
+        <Text style={[styles.greetingText, { fontSize: 16, fontWeight: 800 }]}>
+          John Doe
+        </Text>
+        <View style={styles.infoBox}>
+          <View style={styles.walletInfo}>
+            <Ionicons
+              name="md-wallet"
+              size={24}
+              color="#FFA91A"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ fontSize: 15, fontWeight: 500 }}>Your Balance</Text>
           </View>
-          <View>
-            <TouchableOpacity style={styles.addExpense}>
-              <FontAwesome name="dollar" size={43} color="#7BBB71" />
-            </TouchableOpacity>
-            <Text style={styles.buttonLabel}>Add Expense</Text>
+          <Text style={{ fontSize: 24, fontWeight: 500, left: 37, top: 24 }}>
+            Rp {formattedBalance}
+          </Text>
+          <View style={styles.button}>
+            <View>
+              <TouchableOpacity
+                style={styles.addIncome}
+                onPress={() => nav.navigate("Add Income")}
+              >
+                <MaterialCommunityIcons name="sack" size={43} color="#FFA91A" />
+              </TouchableOpacity>
+              <Text style={[styles.buttonLabel, { fontWeight: 700 }]}>
+                Add Income
+              </Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                style={styles.addExpense}
+                onPress={() => nav.navigate("Add Expense")}
+              >
+                <FontAwesome name="dollar" size={43} color="#7BBB71" />
+              </TouchableOpacity>
+              <Text style={[styles.buttonLabel, { fontWeight: 700 }]}>
+                Add Expense
+              </Text>
+            </View>
           </View>
         </View>
       </View>
