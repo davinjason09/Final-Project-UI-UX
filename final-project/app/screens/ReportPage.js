@@ -3,14 +3,14 @@ import React from "react";
 
 export default function ReportPage() {
   return (
-    <View style={styles.base}>
+    <View style={styles.container}>
       <Text>Report Page</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  base: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
