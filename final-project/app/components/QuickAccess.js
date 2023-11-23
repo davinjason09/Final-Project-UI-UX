@@ -39,7 +39,7 @@ export default function QuickAccess() {
           <View style={styles.button}>
             <View>
               <TouchableOpacity
-                style={styles.addIncome}
+                style={[styles.addButton, { backgroundColor: "#FFF4E0" }]}
                 onPress={() => nav.navigate("Add Income")}
               >
                 <MaterialCommunityIcons name="sack" size={43} color="#FFA91A" />
@@ -50,7 +50,7 @@ export default function QuickAccess() {
             </View>
             <View>
               <TouchableOpacity
-                style={styles.addExpense}
+                style={[styles.addButton, { backgroundColor: "#EAFFE7" }]}
                 onPress={() => nav.navigate("Add Expense")}
               >
                 <FontAwesome name="dollar" size={43} color="#7BBB71" />
@@ -105,16 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     top: 4,
   },
-  addIncome: {
-    backgroundColor: "#FFF4E0",
-    height: 65,
-    width: 117,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  addExpense: {
-    backgroundColor: "#EAFFE7",
+  addButton: {
     height: 65,
     width: 117,
     borderRadius: 10,
