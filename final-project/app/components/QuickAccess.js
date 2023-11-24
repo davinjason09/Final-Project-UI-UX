@@ -33,9 +33,18 @@ export default function QuickAccess() {
             />
             <Text style={{ fontSize: 15, fontWeight: 500 }}>Your Balance</Text>
           </View>
-          <Text style={{ fontSize: 24, fontWeight: 500, left: 37, top: 24 }}>
+          <Text style={{ fontSize: 25, fontWeight: 700, left: 37, top: 24 }}>
             Rp {formattedBalance}
           </Text>
+          <View
+            style={{
+              borderBottomColor: "#B0B0B0B2",
+              borderBottomWidth: 1.5,
+              width: "90%",
+              alignSelf: "center",
+              top: 42,
+            }}
+          />
           <View style={styles.button}>
             <View>
               <TouchableOpacity
@@ -97,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     flexDirection: "row",
     alignItems: "center",
-    top: 54,
+    top: 61,
   },
   buttonLabel: {
     fontSize: 12,
