@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   Ionicons,
@@ -11,8 +11,9 @@ export default function QuickAccess() {
   const nav = useNavigation();
 
   let balance = 707000;
-  let formattedBalance =
-    balance.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ",00-";
+  let formattedBalance = balance
+    .toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 
   return (
     <View style={{ height: 349 }}>
@@ -50,8 +51,16 @@ export default function QuickAccess() {
               <TouchableOpacity
                 style={[styles.addButton, { backgroundColor: "#FFF4E0" }]}
                 onPress={() => nav.navigate("Add Income")}
+                activeOpacity={0.5}
               >
-                <MaterialCommunityIcons name="sack" size={43} color="#FFA91A" />
+                <Image
+                  source={require("../icons/income.png")}
+                  style={{
+                    width: 43,
+                    height: 43,
+                    resizeMode: "contain",
+                  }}
+                />
               </TouchableOpacity>
               <Text style={[styles.buttonLabel, { fontWeight: 700 }]}>
                 Add Income
@@ -61,8 +70,16 @@ export default function QuickAccess() {
               <TouchableOpacity
                 style={[styles.addButton, { backgroundColor: "#EAFFE7" }]}
                 onPress={() => nav.navigate("Add Expense")}
+                activeOpacity={0.5}
               >
-                <FontAwesome name="dollar" size={43} color="#7BBB71" />
+                <Image
+                  source={require("../icons/expense.png")}
+                  style={{
+                    width: 64,
+                    height: 43,
+                    resizeMode: "contain",
+                  }}
+                />
               </TouchableOpacity>
               <Text style={[styles.buttonLabel, { fontWeight: 700 }]}>
                 Add Expense
