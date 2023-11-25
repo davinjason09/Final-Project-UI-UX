@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  Pressable,
   FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function Account({ onSelect, onClose }) {
@@ -54,19 +53,20 @@ export default function Account({ onSelect, onClose }) {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 45,
+            marginTop: 50,
             marginHorizontal: 18,
           }}
         >
-          <Pressable
+          <TouchableOpacity
             style={[styles.circleButton, { backgroundColor: item.bgColor }]}
             onPress={() => {
               onSelect(item);
               onClose();
             }}
+            activeOpacity={0.5}
           >
             <Text style={{ fontSize: 14, fontWeight: 700 }}>{item.name}</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       )}
     />
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 35,
-    borderColor: "#B0B0B04D",
-    borderWidth: 1.5,
+    borderColor: "#B0B0B0",
+    borderWidth: 1.2,
   },
 });

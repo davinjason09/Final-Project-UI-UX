@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  Pressable,
   FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function Category({ onSelect, onClose }) {
@@ -68,12 +68,13 @@ export default function Category({ onSelect, onClose }) {
             marginHorizontal: 18,
           }}
         >
-          <Pressable
+          <TouchableOpacity
             style={[styles.circleButton, { backgroundColor: item.bgColor }]}
             onPress={() => {
               onSelect(item);
               onClose();
             }}
+            activeOpacity={0.5}
           >
             <Image
               source={item.icon}
@@ -83,7 +84,7 @@ export default function Category({ onSelect, onClose }) {
                 resizeMode: "contain",
               }}
             />
-          </Pressable>
+          </TouchableOpacity>
           <Text style={{ fontSize: 12, fontWeight: 700 }}>{item.name}</Text>
         </View>
       )}
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 35,
-    borderColor: "#B0B0B04D",
-    borderWidth: 1.5,
+    borderColor: "#B0B0B0",
+    borderWidth: 1.2,
   },
 });
