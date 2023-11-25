@@ -1,105 +1,109 @@
 import React, { useState } from "react";
 import {
+  Keyboard,
   StyleSheet,
   Text,
-  View,
-  TextInput,
-  Pressable,
-  Keyboard,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { addTransaction } from "../redux/actions";
 
 import ContentPicker from "../components/ContentPicker";
 import Account from "../components/Account";
+import InputField from "../components/InputField";
 
 export default function AddIncome() {
+  const dispatch = useDispatch();
+  const nav = useNavigation();
+
   const [isPickerVisible, setPickerVisible] = useState(false);
   const [date, setDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
-  const [pickedCategories, setPickedCategories] = useState(null);
+  const [pickedAccount, setPickedAccount] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [note, setNote] = useState(null);
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
   const showDatePicker = () => {
-    setPickerVisible(true);
     Keyboard.dismiss();
+    setPickerVisible(true);
   };
 
   const hideDatePicker = () => setPickerVisible(false);
 
-  const handleCategorySelect = (category) => setPickedCategories(category);
-  const handleDateConfirm = (selectedDate) => {
+  const handleCategorySelect = (category) => setPickedAccount(category);
+  const handleDateConfirm = (selDate) => {
     hideDatePicker();
-    setDate(selectedDate);
+
+    setDate(selDate);
     setSelectedDate(
-      `${String(selectedDate.getDate()).padStart(2, "0")}/${String(
-        selectedDate.getMonth() + 1
-      ).padStart(2, "0")}/${String(selectedDate.getFullYear()).slice(2)}`
+      `${String(selDate.getDate()).padStart(2, "0")}/${String(
+        selDate.getMonth() + 1
+      ).padStart(2, "0")}/${String(selDate.getFullYear()).slice(2)}`
     );
   };
 
-  const nav = useNavigation();
+  const handleSave = () => {
+    if (!selectedDate || !pickedAccount || !amount) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const intAmount = parseInt(amount);
+
+    const newIncomeTransaction = {
+      id: uuidv4(),
+      type: "Income",
+      date: selectedDate,
+      account: pickedAccount,
+      amount: intAmount,
+      note: note || "",
+    };
+
+    dispatch(addTransaction(newIncomeTransaction));
+    nav.navigate("Default");
+  };
 
   return (
     <View style={styles.base}>
       <View style={{ marginTop: 38 }}>
-        <Pressable onPress={showDatePicker}>
-          <View style={styles.inputBox}>
-            <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
-              Date
-            </Text>
-            <TextInput
-              placeholder="dd/mm/yy"
-              placeholderTextColor={"#9B9B9B"}
-              style={styles.textInput}
-              editable={false}
-              value={selectedDate}
-            />
-          </View>
-        </Pressable>
-        <Pressable onPress={openModal}>
-          <View style={styles.inputBox}>
-            <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
-              Account
-            </Text>
-            <TextInput
-              placeholder="Choose Account"
-              placeholderTextColor={"#9B9B9B"}
-              style={styles.textInput}
-              value={pickedCategories?.name}
-              editable={false}
-            />
-          </View>
-        </Pressable>
-        <View style={styles.inputBox}>
-          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
-            Amount
-          </Text>
-          <TextInput
-            placeholder="Insert Amount"
-            placeholderTextColor={"#9B9B9B"}
-            style={styles.textInput}
-            keyboardType="numeric"
-          />
-        </View>
-        <View style={styles.inputBox}>
-          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
-            Note
-          </Text>
-          <TextInput
-            placeholder="Add Note"
-            placeholderTextColor={"#9B9B9B"}
-            style={styles.textInput}
-            maxLength={30}
-          />
-        </View>
+        <InputField
+          label="Date"
+          placeholder="Pick Date"
+          value={selectedDate}
+          onPress={showDatePicker}
+          editable={false}
+        />
+        <InputField
+          label="Account"
+          placeholder="Choose Account"
+          value={pickedAccount?.name}
+          onPress={openModal}
+          editable={false}
+        />
+        <InputField
+          label="Amount"
+          placeholder="Enter Amount"
+          keyboardType="numeric"
+          maxLength={12}
+          onChangeText={setAmount}
+        />
+        <InputField
+          label="Note"
+          placeholder="Enter Note"
+          maxLength={30}
+          onChangeText={setNote}
+        />
         <TouchableOpacity
           style={styles.saveButton}
-          onPress={() => nav.navigate("Default")}
+          onPress={handleSave}
           activeOpacity={0.5}
         >
           <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: 700 }}>
@@ -127,26 +131,6 @@ const styles = StyleSheet.create({
   base: {
     flex: 1,
     backgroundColor: "#F7F8F9",
-  },
-  inputBox: {
-    backgroundColor: "#FFFFFF",
-    flexDirection: "row",
-    borderRadius: 5,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "86.4%",
-    height: 56,
-    elevation: 5,
-    shadowColor: "#000000",
-    marginBottom: 5,
-  },
-  textInput: {
-    fontSize: 12,
-    marginRight: 25,
-    width: "40%",
-    textAlign: "right",
-    color: "#000000",
   },
   saveButton: {
     width: "86.4%",
