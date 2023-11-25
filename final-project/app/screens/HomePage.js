@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import QuickAccess from "../components/QuickAccess";
 import RecentTransaction from "../components/RecentTransaction";
@@ -7,8 +7,13 @@ import RecentTransaction from "../components/RecentTransaction";
 export default function HomePage() {
   return (
     <View style={styles.base}>
-      <QuickAccess />
-      <RecentTransaction />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <QuickAccess />
+        <RecentTransaction />
+      </ScrollView>
     </View>
   );
 }
