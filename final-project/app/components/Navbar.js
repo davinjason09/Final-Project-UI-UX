@@ -36,6 +36,8 @@ function BottomNavbar() {
           position: "absolute",
           padding: 8,
           backgroundColor: "#FFFFFF",
+          borderTopWidth: 1,
+          borderTopColor: "#B0B0B04D",
         },
 
         tabBarIcon: ({ color }) => {
