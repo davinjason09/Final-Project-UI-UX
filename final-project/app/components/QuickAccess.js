@@ -1,17 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {
-  Ionicons,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 export default function QuickAccess() {
   const nav = useNavigation();
 
-  let balance = 707000;
-  let formattedBalance = balance
+  const balance = useSelector((state) => state.balance);
+
+  const formattedBalance = balance
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 
