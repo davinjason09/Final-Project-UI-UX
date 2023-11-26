@@ -44,7 +44,7 @@ export default function Category({ onSelect, onClose }) {
     },
     {
       id: 5,
-      name: "Education",
+      name: "Social",
       icon: require("../icons/social.png"),
       bgColor: "#F5F6BC",
       width: 30.44,
