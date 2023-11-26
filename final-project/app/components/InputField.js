@@ -10,13 +10,21 @@ export default function InputField({
   editable,
   maxLength,
   onChangeText,
+  required,
 }) {
   return (
     <Pressable onPress={onPress}>
       <View style={styles.inputBox}>
-        <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
-          {label}
-        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ fontSize: 15, fontWeight: 400, marginLeft: 25 }}>
+            {label}
+          </Text>
+          {required && (
+            <Text style={{ fontSize: 10, color: "#FF0000", marginLeft: 2 }}>
+              *
+            </Text>
+          )}
+        </View>
         <TextInput
           placeholder={placeholder}
           placeholderTextColor={"#9B9B9B"}
