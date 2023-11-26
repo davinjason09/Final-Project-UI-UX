@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTransaction } from "../redux/actions";
@@ -52,7 +52,7 @@ export default function AddIncome() {
 
   const handleSave = () => {
     if (!selectedDate || !pickedAccount || !amount) {
-      alert("Please fill all fields");
+      alert("Please fill all required fields");
       return;
     }
 
@@ -61,8 +61,8 @@ export default function AddIncome() {
     const newIncomeTransaction = {
       id: uuidv4(),
       type: "Income",
-      date: selectedDate,
-      account: pickedAccount,
+      date: date.toISOString(),
+      account: pickedAccount.name,
       amount: intAmount,
       note: note || "",
     };
@@ -80,6 +80,7 @@ export default function AddIncome() {
           value={selectedDate}
           onPress={showDatePicker}
           editable={false}
+          required
         />
         <InputField
           label="Account"
@@ -87,6 +88,7 @@ export default function AddIncome() {
           value={pickedAccount?.name}
           onPress={openModal}
           editable={false}
+          required
         />
         <InputField
           label="Amount"
@@ -94,6 +96,7 @@ export default function AddIncome() {
           keyboardType="numeric"
           maxLength={12}
           onChangeText={setAmount}
+          required
         />
         <InputField
           label="Note"

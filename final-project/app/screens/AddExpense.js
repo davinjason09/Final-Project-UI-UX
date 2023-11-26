@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTransaction } from "../redux/actions";
@@ -58,8 +58,8 @@ export default function AddExpense() {
   };
 
   const handleSave = () => {
-    if (!selectedDate || !pickedAccount || !amount) {
-      alert("Please fill all fields");
+    if (!selectedDate || !pickedAccount || !pickedCategories || !amount) {
+      alert("Please fill all required fields");
       return;
     }
 
@@ -68,9 +68,9 @@ export default function AddExpense() {
     const newIncomeTransaction = {
       id: uuidv4(),
       type: "Expense",
-      date: selectedDate,
-      account: pickedAccount,
-      category: pickedCategories,
+      date: date.toISOString(),
+      account: pickedAccount.name,
+      category: pickedCategories.name,
       amount: intAmount,
       note: note || "",
     };
@@ -88,6 +88,7 @@ export default function AddExpense() {
           value={selectedDate}
           onPress={showDatePicker}
           editable={false}
+          required
         />
         <InputField
           label="Category"
@@ -95,6 +96,7 @@ export default function AddExpense() {
           value={pickedCategories?.name}
           onPress={openCategoryModal}
           editable={false}
+          required
         />
         <InputField
           label="Account"
@@ -102,6 +104,7 @@ export default function AddExpense() {
           value={pickedAccount?.name}
           onPress={openAccountModal}
           editable={false}
+          required
         />
         <InputField
           label="Amount"
@@ -109,6 +112,7 @@ export default function AddExpense() {
           keyboardType="numeric"
           maxLength={12}
           onChangeText={setAmount}
+          required
         />
         <InputField
           label="Note"
