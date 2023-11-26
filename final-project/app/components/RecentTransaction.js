@@ -1,43 +1,38 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
-const Income = [];
-
-const Expense = [];
-
-const allTransactions = [...Income, ...Expense];
-
-const sortedTransactions = allTransactions.sort((a, b) => {
-  return new Date(b.date) - new Date(a.date);
-});
+import Transaction from "./Transaction";
+import EmptyListMessage from "./EmptyListMessage";
 
 export default function RecentTransaction() {
   const nav = useNavigation();
 
+  const transactions = useSelector((state) => state.transactions);
+  const sortedTransactions = transactions.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+
   const last4Transactions = sortedTransactions.slice(0, 4);
 
-  const EmptyListMessage = () => {
+  const renderItem = ({ item, index }) => {
     return (
-      <View style={styles.emptyListStyle}>
-        <Image
-          source={require("../icons/notransaction.png")}
-          style={{ width: 200, height: 150, resizeMode: "contain" }}
-        />
-        <Text style={{ fontSize: 16, fontWeight: 700 }}>
-          No Transaction Found
-        </Text>
+      <View key={item.id}>
+        <Transaction {...item} />
+        {index < last4Transactions.length - 1 && <Separator />}
       </View>
     );
   };
 
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item}</Text>
-      </View>
-    );
-  };
+  const Separator = () => (
+    <View
+      style={{
+        height: 1,
+        backgroundColor: "#B0B0B03E",
+      }}
+    />
+  );
 
   return (
     <View style={{ flex: 1 }}>
@@ -56,9 +51,15 @@ export default function RecentTransaction() {
       </View>
       <View style={styles.container}>
         {last4Transactions.length > 0 ? (
-          last4Transactions.map((item) => renderItem(item))
+          <View
+            style={{ marginTop: 35, marginBottom: 20, paddingHorizontal: 32 }}
+          >
+            {last4Transactions.map((item, index) =>
+              renderItem({ item, index })
+            )}
+          </View>
         ) : (
-          <EmptyListMessage />
+          <EmptyListMessage imgWidth={200} imgHeight={120} textSize={16} />
         )}
       </View>
     </View>
@@ -72,16 +73,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginLeft: 39,
     marginRight: 42,
-    marginTop: 15,
   },
   container: {
     flex: 1,
     flexGrow: 1,
     backgroundColor: "#FFFFFF",
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    borderTopLeftRadius: 45,
+    borderTopRightRadius: 45,
     borderColor: "#B0B0B04D",
-    borderWidth: 1,
+    borderWidth: 0.7,
     marginTop: 15,
     marginBottom: 55,
   },
@@ -89,6 +89,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 50,
   },
 });
