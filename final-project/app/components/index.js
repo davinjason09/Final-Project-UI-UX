@@ -1,5 +1,5 @@
-import CardList from "./CardList";
-import Gap from "./Gap";
+import CardList from "./CardList/cardList";
+import Gap from "./Gap/Gap";
 import Header from "./Header";
 
 export {

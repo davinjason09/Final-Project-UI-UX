@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { IconEducation, IconFood, IconHousehold, IconShopping, IconSocial, IconUser } from '../../assets'
 import { colors, fonts } from '../../utils'
-import Gap from '../Gap'
+import Gap from '../Gap/Gap'
 
 const CardList = ({ listbudget, listStatistik, listbudgetsetting, iconUser, iconHouseHold, iconEducation, iconShopping, iconFood, iconSocial, text, text2, text3, text4, text5, widthInView, backColorInView, backColorOutView, widthOutView, onPress }) => {
     return (
