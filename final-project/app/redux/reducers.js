@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, action) => {
         action.payload.type === "Income"
           ? state.balance + action.payload.amount
           : state.balance - action.payload.amount;
-      // console.log("Updated Transactions:", updatedTransactions);
+
       return {
         ...state,
         transactions: updatedTransactions,
