@@ -41,6 +41,7 @@ export default function TransactionDetails() {
 
   return (
     <View style={styles.base}>
+      <View style={{ marginTop: 16 }} />
       <MonthYearTab onSelectMonth={handleSelectMonth} />
       <View
         style={{
