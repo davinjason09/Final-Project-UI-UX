@@ -55,7 +55,6 @@ export default function Transaction({
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 
-  // format date from "2020-12-01T00:00:00.000Z" to "01 December 2020"
   const formattedDate = new Date(date).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "long",

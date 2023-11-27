@@ -51,6 +51,8 @@ export default function AddIncome() {
   };
 
   const handleSave = () => {
+    Keyboard.dismiss();
+
     if (!selectedDate || !pickedAccount || !amount) {
       alert("Please fill all required fields");
       return;

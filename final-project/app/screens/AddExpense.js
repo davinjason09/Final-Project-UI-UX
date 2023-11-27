@@ -58,6 +58,8 @@ export default function AddExpense() {
   };
 
   const handleSave = () => {
+    Keyboard.dismiss();
+
     if (!selectedDate || !pickedAccount || !pickedCategories || !amount) {
       alert("Please fill all required fields");
       return;
