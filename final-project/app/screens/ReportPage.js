@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { IconLeft, IconRight } from "../assets";
 import { CardList, Gap, Header } from "../components";
-import { colors, fonts } from "../utils";
+import { colors } from "../utils";
 import PieChart from "react-native-pie-chart";
 
 const ReportPage = ({ navigation }) => {
@@ -254,22 +254,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontFamily: fonts.primary.Medium,
     color: colors.white,
     fontSize: 12,
   },
   text2: {
-    fontFamily: fonts.primary.Medium,
     color: colors.black,
     fontSize: 12,
   },
   text3: {
-    fontFamily: fonts.primary.SemiBold,
     color: colors.black,
     fontSize: 14,
   },
   text4: {
-    fontFamily: fonts.primary.Bold,
     color: colors.black,
     fontSize: 24,
   },
