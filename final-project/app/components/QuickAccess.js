@@ -8,6 +8,7 @@ export default function QuickAccess() {
   const nav = useNavigation();
 
   const balance = useSelector((state) => state.balance);
+  const user = useSelector((state) => state.user);
 
   const formattedBalance = balance
     .toString()
@@ -20,7 +21,7 @@ export default function QuickAccess() {
           Good Morning
         </Text>
         <Text style={[styles.greetingText, { fontSize: 16, fontWeight: 800 }]}>
-          John Doe
+          {user}
         </Text>
         <View style={styles.infoBox}>
           <View style={styles.walletInfo}>
