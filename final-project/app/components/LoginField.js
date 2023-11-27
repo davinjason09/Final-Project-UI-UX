@@ -2,7 +2,12 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function LoginField({ icon, label, secureTextEntry }) {
+export default function LoginField({
+  icon,
+  label,
+  secureTextEntry,
+  onChangeText,
+}) {
   return (
     <View>
       <Text style={{ fontSize: 13, fontWeight: 700, left: 10 }}>{label}</Text>
@@ -13,7 +18,10 @@ export default function LoginField({ icon, label, secureTextEntry }) {
           color="#2340DC"
           style={{ marginHorizontal: 10 }}
         />
-        <TextInput secureTextEntry={secureTextEntry}></TextInput>
+        <TextInput
+          secureTextEntry={secureTextEntry}
+          onChangeText={onChangeText}
+        ></TextInput>
       </View>
     </View>
   );
