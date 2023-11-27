@@ -1,7 +1,5 @@
 import CardList from "./CardList/cardList";
 import Gap from "./Gap/Gap";
-import Header from "./Header";
+import Header from "./Header/Header";
 
-export {
-    CardList, Gap, Header
-};
+export { CardList, Gap, Header };
