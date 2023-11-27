@@ -1,7 +1,7 @@
 const initialState = {
   transactions: [],
   balance: 0,
-  user: "",
+  user: "admin",
 };
 
 const rootReducer = (state = initialState, action) => {
