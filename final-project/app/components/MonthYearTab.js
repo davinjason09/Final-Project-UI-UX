@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 import MonthYearPicker from "./MonthYearPicker";
 
-export default function MonthYearTab() {
+export default function MonthYearTab({ onSelectMonth }) {
   const getCurrentMonth = () => new Date().getMonth();
   const getPreviousMonth = (currentMonth) =>
     currentMonth === 0 ? 11 : currentMonth - 1;
@@ -36,6 +36,7 @@ export default function MonthYearTab() {
     const prevYear = prevMonth === 11 ? selectedYear - 1 : selectedYear;
     setSelectedMonth(prevMonth);
     setSelectedYear(prevYear);
+    onSelectMonth(prevMonth, prevYear);
   };
 
   const handleNextMonth = () => {
@@ -43,6 +44,7 @@ export default function MonthYearTab() {
     const nextYear = nextMonth === 0 ? selectedYear + 1 : selectedYear;
     setSelectedMonth(nextMonth);
     setSelectedYear(nextYear);
+    onSelectMonth(nextMonth, nextYear);
   };
 
   return (
