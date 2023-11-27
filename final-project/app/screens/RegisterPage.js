@@ -30,6 +30,23 @@ export default function RegisterPage() {
           Sign Up
         </Text>
       </TouchableOpacity>
+
+      <Text
+        style={{
+          alignSelf: "center",
+          marginTop: 8,
+          fontSize: 12,
+          fontWeight: 300,
+        }}
+      >
+        Already have an account?{" "}
+        <Text
+          style={{ color: "#2340DC", fontWeight: "bold" }}
+          onPress={() => nav.navigate("Login")}
+        >
+          Login
+        </Text>
+      </Text>
     </View>
   );
 }
