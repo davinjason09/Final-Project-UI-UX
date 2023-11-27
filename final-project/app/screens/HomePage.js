@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import QuickAccess from "../components/QuickAccess";
 import RecentTransaction from "../components/RecentTransaction";
@@ -22,6 +22,5 @@ const styles = StyleSheet.create({
   base: {
     flex: 1,
     backgroundColor: "#F7F8F9",
-    paddingTop: Platform.OS === "android" ? 40 : 0,
   },
 });
