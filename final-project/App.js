@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 
 import store from "./app/redux/store";
@@ -20,5 +20,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? 40 : 0,
   },
 });

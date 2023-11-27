@@ -1,6 +1,7 @@
 const initialState = {
   transactions: [],
   balance: 0,
+  user: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,11 +12,16 @@ const rootReducer = (state = initialState, action) => {
         action.payload.type === "Income"
           ? state.balance + action.payload.amount
           : state.balance - action.payload.amount;
-      // console.log("Updated Transactions:", updatedTransactions);
+
       return {
         ...state,
         transactions: updatedTransactions,
         balance: updatedBalance,
+      };
+    case "INIT_USERNAME":
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return state;

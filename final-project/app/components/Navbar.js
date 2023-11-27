@@ -4,12 +4,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
+import GettingStarted from "../screens/GettingStarted";
+import LoginPage from "../screens/LoginPage";
+import RegisterPage from "../screens/RegisterPage";
 import HomePage from "../screens/HomePage";
-import ReportPage from "../screens/ReportPage";
-import ProfilePage from "../screens/ProfilePage";
 import AddIncome from "../screens/AddIncome";
 import AddExpense from "../screens/AddExpense";
 import TransactionDetails from "../screens/TransactionDetails";
+import ReportPage from "../screens/ReportPage";
+import ProfilePage from "../screens/ProfilePage";
 
 const homeName = "Home";
 const reportName = "Report";
@@ -62,7 +65,7 @@ export default function Navbar() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Default"
+        initialRouteName="Getting Started"
         screenOptions={{
           headerTitleAlign: "center",
           headerTitleStyle: {
@@ -72,6 +75,21 @@ export default function Navbar() {
           },
         }}
       >
+        <Stack.Screen
+          name="Getting Started"
+          component={GettingStarted}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterPage}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Default"
           component={BottomNavbar}
