@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { initUsername } from "../redux/actions";
 
 import LoginField from "../components/LoginField";
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
   const nav = useNavigation();
+
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleLogin = () => {
+    if (!username || !password) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    dispatch(initUsername(username));
+
+    nav.navigate("Default");
+  };
 
   return (
     <View style={styles.base}>
@@ -16,15 +33,24 @@ export default function RegisterPage() {
         />
       </View>
       <View style={{ marginHorizontal: "20%", marginVertical: 50 }}>
-        <LoginField label="Username" icon="person-circle-outline" />
+        <LoginField
+          label="Username"
+          icon="person-circle-outline"
+          onChangeText={setUsername}
+        />
         <View style={{ height: 23 }}></View>
-        <LoginField label="Password" icon="key" secureTextEntry />
+        <LoginField
+          label="Password"
+          icon="key"
+          secureTextEntry
+          onChangeText={setPassword}
+        />
       </View>
 
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.5}
-        onPress={() => nav.navigate("Default")}
+        onPress={handleLogin}
       >
         <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: 700 }}>
           Sign Up
