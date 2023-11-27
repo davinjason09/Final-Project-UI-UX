@@ -1,14 +1,24 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import Routers from './routers';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
 
-const App = () => {
+import store from "./app/redux/store";
+import Navbar from "./app/components/Navbar";
+
+export default function App() {
   return (
-    <NavigationContainer>
-      <Routers />
-    </NavigationContainer>
-  )
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Navbar />
+        <StatusBar style="auto" />
+      </View>
+    </Provider>
+  );
 }
 
-export default App
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
