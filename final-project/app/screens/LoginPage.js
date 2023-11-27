@@ -30,24 +30,23 @@ export default function LoginPage() {
           Login
         </Text>
       </TouchableOpacity>
-      <View>
+
+      <Text
+        style={{
+          alignSelf: "center",
+          marginTop: 8,
+          fontSize: 12,
+          fontWeight: 300,
+        }}
+      >
+        Don't have an account?{" "}
         <Text
-          style={{
-            alignSelf: "center",
-            marginTop: 8,
-            fontSize: 12,
-            fontWeight: 300,
-          }}
+          style={{ color: "#2340DC", fontWeight: "bold" }}
+          onPress={() => nav.navigate("Register")}
         >
-          Don't have an account?{" "}
-          <Text
-            style={{ color: "#2340DC", fontWeight: "bold" }}
-            onPress={() => nav.navigate("Register")}
-          >
-            Sign Up
-          </Text>
+          Sign Up
         </Text>
-      </View>
+      </Text>
     </View>
   );
 }
