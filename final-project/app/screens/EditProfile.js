@@ -23,6 +23,7 @@ export default function EditProfile() {
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [gender, setGender] = useState(user.gender);
+  const [image, setImage] = useState(user.image);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -33,12 +34,16 @@ export default function EditProfile() {
     });
 
     if (!result.canceled) {
-      dispatch(setProfileImage(result.assets[0].uri));
+      setImage(result.assets[0].uri);
     }
   };
 
   const handleSave = () => {
     dispatch(editProfile(username, email, gender));
+    if (image) {
+      dispatch(setProfileImage(image));
+    }
+
     nav.goBack();
   };
 
@@ -51,9 +56,9 @@ export default function EditProfile() {
           activeOpacity={0.9}
         >
           <View>
-            {user.image ? (
+            {image ? (
               <Image
-                source={{ uri: user.image }}
+                source={{ uri: image }}
                 style={{ width: 106, height: 106, borderRadius: 53 }}
               />
             ) : (
@@ -63,7 +68,7 @@ export default function EditProfile() {
                 color={colors.white}
               />
             )}
-            <View style={styles.cameraIcon(user.image)}>
+            <View style={styles.cameraIcon(image)}>
               <MaterialCommunityIcons name="camera" size={18} color="#FFFFFF" />
             </View>
           </View>
