@@ -3,6 +3,7 @@ let colors = {};
 colors.black = "#1D232E";
 colors.blue = "#2340DC";
 colors.blue2 = "#D6DCF6";
+colors.blue3 = "#949FE7";
 colors.green = "#7BBB71";
 colors.green2 = "#EAFFE7";
 colors.green3 = "#3DA440";
