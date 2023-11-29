@@ -99,7 +99,7 @@ export default function Transactions() {
 
 const groupTransactionsByDate = (transactions) => {
   const groupedTransactions = transactions.reduce((acc, transaction) => {
-    const date = transaction.date.split("T")[0];
+    const date = new Date(transaction.date).toLocaleDateString("en-CA");
 
     if (!acc[date]) {
       acc[date] = { date, transactions: [] };
