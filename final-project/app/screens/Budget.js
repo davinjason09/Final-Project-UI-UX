@@ -32,7 +32,9 @@ export default function Budget() {
   });
 
   const monthlyBalance =
-    data && data[year] && data[year][month] ? data[year][month].balance : 0;
+    data && data[year] && data[year][month]
+      ? data[year][month].balance - data[year][month].spent
+      : 0;
 
   return (
     <View>
@@ -49,7 +51,8 @@ export default function Budget() {
                 Remaining (Monthly)
               </Text>
               <Text style={{ fontSize: 24, fontWeight: 700 }}>
-                Rp {format(monthlyBalance)}
+                {monthlyBalance >= 0 ? "Rp" : "-Rp"}{" "}
+                {format(Math.abs(monthlyBalance))}
               </Text>
             </View>
             <TouchableOpacity

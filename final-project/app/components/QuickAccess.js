@@ -10,9 +10,9 @@ export default function QuickAccess() {
   const balance = useSelector((state) => state.balance);
   const user = useSelector((state) => state.user);
 
-  const formattedBalance = balance
-    .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  const format = (value) => {
+    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  };
 
   return (
     <View style={{ height: 318 }}>
@@ -34,7 +34,7 @@ export default function QuickAccess() {
             <Text style={{ fontSize: 15, fontWeight: 500 }}>Total Balance</Text>
           </View>
           <Text style={{ fontSize: 25, fontWeight: 700, left: 37, top: 24 }}>
-            Rp {formattedBalance}
+            {balance >= 0 ? "Rp" : "-Rp"} {format(Math.abs(balance))}
           </Text>
           <View
             style={{
