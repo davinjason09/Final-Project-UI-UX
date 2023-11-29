@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import MonthYearTab from "../components/MonthYearTab";
 import Transaction from "../components/Transaction";
 import EmptyListMessage from "../components/EmptyListMessage";
+import { resetDate } from "../redux/actions";
 
 export default function TransactionDetails() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
+  }, []);
+
   const transactions = useSelector((state) => state.transactions);
 
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const selectedMonth = useSelector((state) => state.initialMonth);
+  const selectedYear = useSelector((state) => state.initialYear);
+
+  console.log(selectedMonth, selectedYear);
 
   const groupedTransactions = groupTransactionsByDate(transactions);
 
@@ -19,11 +27,6 @@ export default function TransactionDetails() {
       <Transaction {...item} />
     </View>
   );
-
-  const handleSelectMonth = (selectedMonth, selectedYear) => {
-    setSelectedMonth(selectedMonth);
-    setSelectedYear(selectedYear);
-  };
 
   const filteredTransactions = groupedTransactions.filter(
     (group) =>
@@ -41,7 +44,8 @@ export default function TransactionDetails() {
 
   return (
     <View style={styles.base}>
-      <MonthYearTab onSelectMonth={handleSelectMonth} />
+      <View style={{ marginTop: 16 }} />
+      <MonthYearTab />
       <View
         style={{
           flex: 1,
