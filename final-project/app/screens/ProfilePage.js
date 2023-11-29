@@ -1,14 +1,20 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 
+import Buttons from "../components/Buttons";
+
 export default function ProfilePage() {
   const nav = useNavigation();
 
   const user = useSelector((state) => state.user);
+
+  const handlePress = () => {
+    nav.navigate("Edit Profile");
+  };
 
   return (
     <View style={styles.base}>
@@ -30,17 +36,14 @@ export default function ProfilePage() {
             <Text style={{ fontSize: 16, fontWeight: 500, marginBottom: 14 }}>
               {user.username}
             </Text>
-            <TouchableOpacity
-              style={styles.editButton}
-              activeOpacity={0.9}
-              onPress={() => nav.navigate("Edit Profile")}
-            >
-              <Text
-                style={{ fontSize: 14, fontWeight: 700, color: colors.white }}
-              >
-                Edit Profile
-              </Text>
-            </TouchableOpacity>
+            <Buttons
+              text="Edit Profile"
+              width={160}
+              height={24}
+              textSize={14}
+              color={colors.blue}
+              onPress={handlePress}
+            />
           </View>
         </View>
       </View>
@@ -109,14 +112,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     alignSelf: "center",
-  },
-  editButton: {
-    backgroundColor: colors.blue,
-    borderRadius: 4,
-    width: 170,
-    height: 24,
-    justifyContent: "center",
-    alignItems: "center",
   },
   infoRow: {
     flexDirection: "row",

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { initUsername } from "../redux/actions";
+import { initUser } from "../redux/actions";
+import colors from "../utils/colors";
 
+import Buttons from "../components/Buttons";
 import LoginField from "../components/LoginField";
 
 export default function RegisterPage() {
@@ -15,11 +17,11 @@ export default function RegisterPage() {
 
   const handleLogin = () => {
     if (!username || !password) {
-      alert("Please fill all required fields");
+      alert("Please fill all the fields");
       return;
     }
 
-    dispatch(initUsername(username));
+    dispatch(initUser(username, password));
 
     nav.navigate("Default");
   };
@@ -47,15 +49,14 @@ export default function RegisterPage() {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.button}
-        activeOpacity={0.5}
+      <Buttons
+        width={"60%"}
+        height={45}
+        color={colors.blue}
+        textSize={14}
+        text="Sign Up"
         onPress={handleLogin}
-      >
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: 700 }}>
-          Sign Up
-        </Text>
-      </TouchableOpacity>
+      />
 
       <Text
         style={{
@@ -67,7 +68,7 @@ export default function RegisterPage() {
       >
         Already have an account?{" "}
         <Text
-          style={{ color: "#2340DC", fontWeight: "bold" }}
+          style={{ color: colors.blue, fontWeight: "bold" }}
           onPress={() => nav.navigate("Login")}
         >
           Login
@@ -80,22 +81,22 @@ export default function RegisterPage() {
 const styles = StyleSheet.create({
   base: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
   },
   logo: {
     width: 127,
     height: 116.361,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     elevation: 5,
     borderRadius: 80,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    shadowColor: "#000000",
+    shadowColor: colors.black,
     marginTop: 80,
   },
   button: {
-    backgroundColor: "#2340DC",
+    backgroundColor: colors.blue,
     height: 45,
     width: "60%",
     justifyContent: "center",

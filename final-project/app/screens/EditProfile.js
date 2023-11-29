@@ -9,10 +9,12 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import * as ImagePicker from "expo-image-picker";
 import { editProfile, setProfileImage } from "../redux/actions";
-import colors from "../utils/colors";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
+import colors from "../utils/colors";
+
+import Buttons from "../components/Buttons";
 
 export default function EditProfile() {
   const dispatch = useDispatch();
@@ -107,15 +109,14 @@ export default function EditProfile() {
         </View>
 
         <View style={{ height: 84 }} />
-        <TouchableOpacity
-          style={styles.saveButton}
-          activeOpacity={0.9}
+        <Buttons
+          width={"85%"}
+          height={52}
+          color={colors.blue}
+          text="Save"
+          textSize={16}
           onPress={handleSave}
-        >
-          <Text style={{ fontSize: 14, fontWeight: 700, color: colors.white }}>
-            Save
-          </Text>
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );
@@ -160,13 +161,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderBottomColor: colors.grey,
     borderBottomWidth: 1,
-  },
-  saveButton: {
-    backgroundColor: colors.blue,
-    borderRadius: 4,
-    width: "85%",
-    height: 52,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

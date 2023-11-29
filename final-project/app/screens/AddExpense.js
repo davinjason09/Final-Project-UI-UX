@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import {
-  Keyboard,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTransaction } from "../redux/actions";
+import colors from "../utils/colors";
 
 import ContentPicker from "../components/ContentPicker";
 import Account from "../components/Account";
 import Category from "../components/Category";
 import InputField from "../components/InputField";
+import Buttons from "../components/Buttons";
 
 export default function AddExpense() {
   const dispatch = useDispatch();
@@ -123,15 +119,15 @@ export default function AddExpense() {
           onChangeText={setNote}
         />
       </View>
-      <TouchableOpacity
-        style={styles.saveButton}
+      <View style={{ height: 38 }} />
+      <Buttons
+        width={"86.4%"}
+        height={36}
+        color={colors.blue}
+        text="Save"
+        textSize={14}
         onPress={handleSave}
-        activeOpacity={0.5}
-      >
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: 700 }}>
-          Save
-        </Text>
-      </TouchableOpacity>
+      />
 
       <DateTimePickerModal
         date={date}
@@ -164,16 +160,6 @@ export default function AddExpense() {
 const styles = StyleSheet.create({
   base: {
     flex: 1,
-    backgroundColor: "#F7F8F9",
-  },
-  saveButton: {
-    width: "86.4%",
-    height: 36,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    backgroundColor: "#2340DC",
-    marginTop: 38,
+    backgroundColor: colors.white2,
   },
 });

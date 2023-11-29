@@ -46,8 +46,6 @@ const initializeMonthlyData = (monthlyData, year, month) => {
       },
     };
   }
-
-  console.log(monthlyData);
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -118,9 +116,6 @@ const rootReducer = (state = initialState, action) => {
         ].spent += action.payload.amount;
       }
 
-      // log the entirety of monthlydata
-      console.log(state.monthlyData);
-
       return {
         ...state,
         transactions: updatedTransactions,
@@ -129,7 +124,6 @@ const rootReducer = (state = initialState, action) => {
       };
     case "UPDATE_CATEGORY_ALLOCATION":
       const { month, year, type, amount } = action.payload;
-      console.log(action.payload.month);
 
       initializeMonthlyData(state.monthlyData, year, month);
 

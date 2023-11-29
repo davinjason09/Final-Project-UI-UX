@@ -1,9 +1,16 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import colors from "../utils/colors";
+
+import Buttons from "../components/Buttons";
 
 export default function GettingStarted() {
   const nav = useNavigation();
+
+  const handlePress = () => {
+    nav.navigate("Login");
+  };
 
   return (
     <View style={styles.base}>
@@ -30,21 +37,20 @@ export default function GettingStarted() {
             fontSize: 16,
             fontWeight: 500,
             textAlign: "center",
-            color: "#00000099",
+            color: colors.black + "99",
           }}
         >
           Be more organized{"\n"}in managing your money!
         </Text>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        activeOpacity={0.5}
-        onPress={() => nav.navigate("Login")}
-      >
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: 700 }}>
-          Get Started
-        </Text>
-      </TouchableOpacity>
+      <Buttons
+        width={"60%"}
+        height={45}
+        color={colors.blue}
+        textSize={14}
+        text="Get Started"
+        onPress={handlePress}
+      />
     </View>
   );
 }
@@ -52,34 +58,25 @@ export default function GettingStarted() {
 const styles = StyleSheet.create({
   base: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
   },
   logoBox: {
     width: "100%",
     height: "80%",
-    backgroundColor: "#2340DC",
+    backgroundColor: colors.blue,
     borderBottomLeftRadius: 150,
     borderBottomRightRadius: 150,
   },
   logo: {
     width: 191,
     height: 175,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     elevation: 5,
     borderRadius: 80,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    shadowColor: "#000000",
+    shadowColor: colors.black,
     marginTop: 240,
-  },
-  button: {
-    backgroundColor: "#2340DC",
-    height: 45,
-    width: "60%",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    borderRadius: 4,
   },
 });
