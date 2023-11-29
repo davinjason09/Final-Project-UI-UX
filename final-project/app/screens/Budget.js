@@ -8,14 +8,12 @@ import {
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import colors from "../utils/colors";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import BudgetList from "../components/BudgetList";
-import { resetDate } from "../redux/actions";
 
 export default function Budget() {
   const nav = useNavigation();
-  const dispatch = useDispatch();
   const scrollViewRef = useRef();
 
   const month = useSelector((state) => state.initialMonth);
@@ -28,7 +26,6 @@ export default function Budget() {
 
   useFocusEffect(() => {
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
-    dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
   });
 
   const monthlyBalance =
