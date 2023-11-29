@@ -1,14 +1,21 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-
-import HomePage from "../screens/HomePage";
-import ProfilePage from "../screens/ProfilePage";
+import { useDispatch } from "react-redux";
 
 import TopTabNavigation from "./TopTabNavigation";
 
+import HomePage from "../screens/HomePage";
+import ProfilePage from "../screens/ProfilePage";
+import { resetDate } from "../redux/actions";
+
 export default function BottomTabNavigation() {
+  const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
+
+  const ReportPagePress = () => {
+    dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
+  };
 
   return (
     <Tab.Navigator
@@ -35,7 +42,6 @@ export default function BottomTabNavigation() {
           borderTopWidth: 1,
           borderTopColor: "#B0B0B04D",
         },
-
         tabBarIcon: ({ color }) => {
           let rn = route.name;
 
@@ -52,7 +58,13 @@ export default function BottomTabNavigation() {
         component={HomePage}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Report" component={TopTabNavigation} />
+      <Tab.Screen
+        name="Report"
+        component={TopTabNavigation}
+        listeners={{
+          tabPress: ReportPagePress,
+        }}
+      />
       <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>
   );
