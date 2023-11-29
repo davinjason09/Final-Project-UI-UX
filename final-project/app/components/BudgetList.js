@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { colors } from "../utils";
+import colors from "../utils/colors";
 
 import EditAmount from "./EditAmount";
 

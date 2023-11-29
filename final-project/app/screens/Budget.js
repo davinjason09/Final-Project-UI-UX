@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { colors } from "../utils";
+import colors from "../utils/colors";
 import { useSelector } from "react-redux";
 
 import BudgetList from "../components/BudgetList";
