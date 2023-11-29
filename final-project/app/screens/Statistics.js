@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { colors } from "../utils";
+import colors from "../utils/colors";
 import { useFocusEffect } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import PieChart from "react-native-pie-chart";
