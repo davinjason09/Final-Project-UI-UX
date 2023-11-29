@@ -8,12 +8,14 @@ import {
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import colors from "../utils/colors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import BudgetList from "../components/BudgetList";
+import { resetDate } from "../redux/actions";
 
 export default function Budget() {
   const nav = useNavigation();
+  const dispatch = useDispatch();
   const scrollViewRef = useRef();
 
   const month = useSelector((state) => state.initialMonth);
@@ -26,6 +28,7 @@ export default function Budget() {
 
   useFocusEffect(() => {
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
   });
 
   const monthlyBalance =
@@ -51,6 +54,7 @@ export default function Budget() {
             </View>
             <TouchableOpacity
               style={styles.settings}
+              activeOpacity={0.9}
               onPress={() => nav.navigate("Budget Settings")}
             >
               <Text style={{ fontSize: 14, fontWeight: 600 }}>
