@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
-
+import { useDispatch, useSelector } from "react-redux";
+import { changeDate } from "../redux/actions";
 import MonthYearPicker from "./MonthYearPicker";
 
-export default function MonthYearTab({ onSelectMonth }) {
-  const getCurrentMonth = () => new Date().getMonth();
+export default function MonthYearTab() {
+  const dispatch = useDispatch();
+  const selectedMonth = useSelector((state) => state.initialMonth);
+  const selectedYear = useSelector((state) => state.initialYear);
+
   const getPreviousMonth = (currentMonth) =>
     currentMonth === 0 ? 11 : currentMonth - 1;
   const getNextMonth = (currentMonth) =>
@@ -28,23 +32,18 @@ export default function MonthYearTab({ onSelectMonth }) {
     return months[monthIndex];
   };
 
-  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
   const handlePrevMonth = () => {
     const prevMonth = getPreviousMonth(selectedMonth);
     const prevYear = prevMonth === 11 ? selectedYear - 1 : selectedYear;
-    setSelectedMonth(prevMonth);
-    setSelectedYear(prevYear);
-    onSelectMonth(prevMonth, prevYear);
+
+    dispatch(changeDate(prevMonth, prevYear));
   };
 
   const handleNextMonth = () => {
     const nextMonth = getNextMonth(selectedMonth);
     const nextYear = nextMonth === 0 ? selectedYear + 1 : selectedYear;
-    setSelectedMonth(nextMonth);
-    setSelectedYear(nextYear);
-    onSelectMonth(nextMonth, nextYear);
+
+    dispatch(changeDate(nextMonth, nextYear));
   };
 
   return (
