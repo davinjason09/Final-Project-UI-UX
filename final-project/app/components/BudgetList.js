@@ -5,14 +5,15 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import colors from "../utils/colors";
 import { useDispatch, useSelector } from "react-redux";
+import { editCategory } from "../redux/actions";
+import * as Progress from "react-native-progress";
 
 import EditAmount from "./EditAmount";
-import { editCategory } from "../redux/actions";
+import Buttons from "./Buttons";
 
 export default function BudgetList({
   type,
@@ -45,12 +46,15 @@ export default function BudgetList({
   const totalSpent =
     data && data[year] && data[year][month] ? data[year][month].spent : 0;
 
+  const percentageSpent =
+    spent && allocated ? +((spent / allocated) * 100).toFixed(2) : 0;
+
   const [amount, setAmount] = useState(allocated);
 
   const Icons = {
     User: {
       icon: require("../icons/user.png"),
-      bgColor: "#00000000",
+      bgColor: "transparent",
       width: 39.43,
       height: 45.06,
       barColor: colors.blue,
@@ -97,7 +101,6 @@ export default function BudgetList({
   };
 
   const handleSave = () => {
-    console.log(month, year, type, amount);
     const intAmount = parseInt(amount);
     dispatch(editCategory(month, year, type, intAmount));
 
@@ -109,9 +112,7 @@ export default function BudgetList({
       <Pressable onPress={onPress}>
         <View style={styles.container(list)}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View
-              style={[styles.circle, { backgroundColor: Icons[type].bgColor }]}
-            >
+            <View style={styles.circle(Icons[type].bgColor, 46)}>
               {Icons[type].icon && (
                 <Image
                   source={Icons[type].icon}
@@ -151,13 +152,7 @@ export default function BudgetList({
                     height: 18,
                   }}
                 >
-                  <Text
-                    style={{
-                      fontSize: 11,
-                      fontWeight: "bold",
-                      color: colors.white,
-                    }}
-                  >
+                  <Text style={styles.text(11, "bold", colors.white)}>
                     {spent && totalSpent
                       ? +((spent / totalSpent) * 100).toFixed(2)
                       : 0}
@@ -169,28 +164,27 @@ export default function BudgetList({
           </View>
           {list && (
             <View>
-              <View style={styles.progressBar}>
-                <View
-                  style={{
-                    width: spent && allocated ? 150 * (spent / allocated) : 0,
-                    height: 15,
-                    borderRadius: 5,
-                    backgroundColor: Icons[type].barColor,
-                  }}
-                />
-              </View>
+              <Progress.Bar
+                progress={spent && allocated ? spent / allocated : 0}
+                width={150}
+                height={15}
+                borderColor="transparent"
+                borderRadius={5}
+                color={Icons[type].barColor}
+                unfilledColor={colors.grey}
+              />
               <View style={styles.information}>
-                <Text style={{ fontSize: 12, fontWeight: 500 }}>
+                <Text style={styles.text(12, "500", colors.black)}>
                   Rp {format(spent)}
                 </Text>
-                <Text style={{ fontSize: 12, fontWeight: 500 }}>
-                  Rp {format(allocated)}
+                <Text style={styles.text(12, "500", colors.black)}>
+                  {percentageSpent}%
                 </Text>
               </View>
             </View>
           )}
           {(config || stats) && (
-            <Text style={{ fontSize: 16, fontWeight: 700 }}>
+            <Text style={styles.text(16, "700", colors.black)}>
               Rp {format(config ? allocated : spent)}
             </Text>
           )}
@@ -198,7 +192,7 @@ export default function BudgetList({
       </Pressable>
 
       <EditAmount isvisible={isVisible} onClose={onClose}>
-        <Text style={{ fontSize: 18, fontWeight: 700 }}>{type}</Text>
+        <Text style={styles.text(18, "700", colors.black)}>{type}</Text>
         <TextInput
           placeholder="Enter Amount"
           placeholderTextColor={colors.grey2}
@@ -207,15 +201,14 @@ export default function BudgetList({
           value={amount ? amount.toString() : ""}
           onChangeText={setAmount}
         />
-        <TouchableOpacity
+        <Buttons
+          width={250}
+          height={52}
+          color={colors.blue}
+          text="Save"
+          textSize={14}
           onPress={handleSave}
-          style={styles.saveButton}
-          activeOpacity={0.5}
-        >
-          <Text style={{ fontSize: 14, fontWeight: 700, color: colors.white }}>
-            Save
-          </Text>
-        </TouchableOpacity>
+        />
       </EditAmount>
     </View>
   );
@@ -237,19 +230,19 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
     marginBottom: 5,
   }),
-  circle: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
+  circle: (bgColor, size) => ({
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+    backgroundColor: bgColor,
     alignItems: "center",
     justifyContent: "center",
-  },
-  progressBar: {
-    width: 150,
-    height: 15,
-    borderRadius: 5,
-    backgroundColor: colors.grey,
-  },
+  }),
+  text: (size, weight, color) => ({
+    fontSize: size,
+    fontWeight: weight,
+    color: color,
+  }),
   information: {
     justifyContent: "space-between",
     flexDirection: "row",
@@ -261,14 +254,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     textAlign: "center",
-  },
-  saveButton: {
-    backgroundColor: colors.blue,
-    colors: colors.white,
-    width: 250,
-    height: 52,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
