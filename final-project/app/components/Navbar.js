@@ -2,14 +2,16 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import BottomTabNavigation from "./BottomTabNavigation";
+
 import GettingStarted from "../screens/GettingStarted";
 import LoginPage from "../screens/LoginPage";
 import RegisterPage from "../screens/RegisterPage";
 import AddIncome from "../screens/AddIncome";
 import AddExpense from "../screens/AddExpense";
 import TransactionDetails from "../screens/TransactionDetails";
-import BottomTabNavigation from "./BottomTabNavigation";
 import BudgetSettings from "../screens/BudgetSettings";
+import EditProfile from "../screens/EditProfile";
 
 export default function Navbar() {
   const Stack = createStackNavigator();
@@ -54,6 +56,7 @@ export default function Navbar() {
           component={TransactionDetails}
         />
         <Stack.Screen name="Budget Settings" component={BudgetSettings} />
+        <Stack.Screen name="Edit Profile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
