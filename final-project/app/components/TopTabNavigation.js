@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { useDispatch } from "react-redux";
+import { resetDate } from "../redux/actions";
 
 import Budget from "../screens/Budget";
 import Statistics from "../screens/Statistics";
 import MonthYearTab from "./MonthYearTab";
 
 function MyTabBar({ state, descriptors, navigation }) {
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const dispatch = useDispatch();
 
-  const handleSelectMonth = (selectedMonth, selectedYear) => {
-    setSelectedMonth(selectedMonth);
-    setSelectedYear(selectedYear);
-  };
+  useEffect(() => {
+    dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
+  }, [state.index, dispatch]);
 
   return (
     <View style={{ backgroundColor: "#F7F8F9" }}>
@@ -74,7 +74,7 @@ function MyTabBar({ state, descriptors, navigation }) {
           );
         })}
       </View>
-      <MonthYearTab onSelectMonth={handleSelectMonth} />
+      <MonthYearTab />
     </View>
   );
 }
