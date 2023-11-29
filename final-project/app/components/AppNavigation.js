@@ -9,11 +9,11 @@ import LoginPage from "../screens/LoginPage";
 import RegisterPage from "../screens/RegisterPage";
 import AddIncome from "../screens/AddIncome";
 import AddExpense from "../screens/AddExpense";
-import TransactionDetails from "../screens/TransactionDetails";
+import Transactions from "../screens/Transactions";
 import BudgetSettings from "../screens/BudgetSettings";
 import EditProfile from "../screens/EditProfile";
 
-export default function Navbar() {
+export default function AppNavigation() {
   const Stack = createStackNavigator();
 
   return (
@@ -51,10 +51,7 @@ export default function Navbar() {
         />
         <Stack.Screen name="Add Income" component={AddIncome} />
         <Stack.Screen name="Add Expense" component={AddExpense} />
-        <Stack.Screen
-          name="Transaction Details"
-          component={TransactionDetails}
-        />
+        <Stack.Screen name="Transactions" component={Transactions} />
         <Stack.Screen name="Budget Settings" component={BudgetSettings} />
         <Stack.Screen name="Edit Profile" component={EditProfile} />
       </Stack.Navigator>
