@@ -21,7 +21,7 @@ export default function QuickAccess() {
           Good Morning
         </Text>
         <Text style={[styles.greetingText, { fontSize: 16, fontWeight: 800 }]}>
-          {user}
+          {user.username}
         </Text>
         <View style={styles.infoBox}>
           <View style={styles.walletInfo}>
