@@ -3,9 +3,19 @@ export const addTransaction = (transaction) => ({
   payload: transaction,
 });
 
-export const initUsername = (username) => ({
-  type: "INIT_USERNAME",
-  payload: username,
+export const initUser = (username, password) => ({
+  type: "INIT_USER",
+  payload: { username, password },
+});
+
+export const setProfileImage = (image) => ({
+  type: "SET_PROFILE_IMAGE",
+  payload: image,
+});
+
+export const editProfile = (username, email, gender) => ({
+  type: "EDIT_PROFILE",
+  payload: { username, email, gender },
 });
 
 export const resetDate = (month, year) => ({
