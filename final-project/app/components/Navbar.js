@@ -9,7 +9,7 @@ import AddIncome from "../screens/AddIncome";
 import AddExpense from "../screens/AddExpense";
 import TransactionDetails from "../screens/TransactionDetails";
 import BottomTabNavigation from "./BottomTabNavigation";
-import BudgetSetting from "../screens/BudgetSetting";
+import BudgetSettings from "../screens/BudgetSettings";
 
 export default function Navbar() {
   const Stack = createStackNavigator();
@@ -53,7 +53,7 @@ export default function Navbar() {
           name="Transaction Details"
           component={TransactionDetails}
         />
-        <Stack.Screen name="Budget Settings" component={BudgetSetting} />
+        <Stack.Screen name="Budget Settings" component={BudgetSettings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
