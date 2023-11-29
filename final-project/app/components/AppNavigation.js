@@ -19,7 +19,7 @@ export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Default"
+        initialRouteName="Getting Started"
         screenOptions={{
           headerTitleAlign: "center",
           headerTitleStyle: {
