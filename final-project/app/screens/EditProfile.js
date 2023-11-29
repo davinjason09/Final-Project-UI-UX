@@ -101,7 +101,7 @@ export default function EditProfile() {
         <View style={styles.infoRow}>
           <Text style={styles.infoText}>Gender</Text>
           <TextInput
-            placeholder="Enter Email"
+            placeholder="Enter Gender"
             value={gender ? gender : ""}
             onChangeText={setGender}
             style={{ textAlign: "right" }}
