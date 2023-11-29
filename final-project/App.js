@@ -4,13 +4,13 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 
 import store from "./app/redux/store";
-import Navbar from "./app/components/Navbar";
+import AppNavigation from "./app/components/AppNavigation";
 
 export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <Navbar />
+        <AppNavigation />
         <StatusBar style="auto" />
       </View>
     </Provider>
