@@ -1,10 +1,10 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-import Transaction from "./Transaction";
 import EmptyListMessage from "./EmptyListMessage";
+import TransactionSummary from "./TransactionSummary";
 
 export default function RecentTransaction() {
   const nav = useNavigation();
@@ -19,7 +19,7 @@ export default function RecentTransaction() {
   const renderItem = ({ item, index }) => {
     return (
       <View key={item.id}>
-        <Transaction {...item} />
+        <TransactionSummary {...item} />
         {index < last4Transactions.length - 1 && <Separator />}
       </View>
     );
@@ -43,7 +43,7 @@ export default function RecentTransaction() {
         <TouchableOpacity>
           <Text
             style={{ fontSize: 14, fontWeight: 500, color: "#2340DC" }}
-            onPress={() => nav.navigate("Transaction Details")}
+            onPress={() => nav.navigate("Transactions")}
           >
             Show All
           </Text>

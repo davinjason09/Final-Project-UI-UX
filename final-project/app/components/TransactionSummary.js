@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import colors from "../utils/colors";
 
-export default function Transaction({
+export default function TransactionSummary({
   type,
   amount,
   date,
@@ -12,43 +13,43 @@ export default function Transaction({
   const categoryIcons = {
     Shopping: {
       icon: require("../icons/shopping.png"),
-      bgColor: "#D6DCF6",
+      bgColor: colors.blue2,
       width: 13.33,
       height: 15.05,
     },
     Food: {
       icon: require("../icons/food.png"),
-      bgColor: "#FFF4E0",
+      bgColor: colors.orange2,
       width: 16,
       height: 15,
     },
     Education: {
       icon: require("../icons/education.png"),
-      bgColor: "#FDDCDC",
+      bgColor: colors.red2,
       width: 20,
       height: 15,
     },
     Household: {
       icon: require("../icons/household.png"),
-      bgColor: "#EAFFE7",
+      bgColor: colors.green2,
       width: 14.44,
       height: 14.44,
     },
     Social: {
       icon: require("../icons/social.png"),
-      bgColor: "#F5F6BC",
+      bgColor: colors.yellow2,
       width: 17.39,
       height: 18.26,
     },
   };
 
   const accountColor = {
-    BCA: "#DCDCF6",
-    BNI: "#FFF4E0",
-    BRI: "#FDDCDC",
-    BSI: "#EAFFE7",
-    Mandiri: "#F5F6BC",
-    Cash: "#F5F6BC",
+    BCA: colors.blue2,
+    BNI: colors.orange2,
+    BRI: colors.red2,
+    BSI: colors.green2,
+    Mandiri: colors.yellow2,
+    Cash: colors.yellow2,
   };
 
   const formattedAmount = amount
@@ -73,17 +74,13 @@ export default function Transaction({
     >
       <View style={{ flexDirection: "row" }}>
         <View
-          style={[
-            styles.circle,
-            {
-              backgroundColor: isIncome
-                ? accountColor[account]
-                : categoryIcons[category].bgColor,
-            },
-          ]}
+          style={styles.circle(
+            isIncome ? accountColor[account] : categoryIcons[category].bgColor,
+            50
+          )}
         >
           {isIncome ? (
-            <Text style={{ fontSize: 12, fontWeight: 700 }}>{account}</Text>
+            <Text style={styles.text(12, "700", colors.black)}>{account}</Text>
           ) : (
             categoryIcons[category] && (
               <Image
@@ -104,29 +101,28 @@ export default function Transaction({
             marginLeft: 12,
           }}
         >
-          <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+          <Text style={styles.text(15, "bold", colors.black)}>
             {isIncome ? "Income" : category}
           </Text>
-          <Text style={{ fontSize: 11.2, fontWeight: 500, color: "#969696" }}>
+          <Text style={styles.text(11.2, "500", colors.grey4)}>
             {formattedDate}
           </Text>
           {note && (
-            <Text style={{ fontSize: 11.2, fontWeight: 500, color: "#969696" }}>
-              {note}
+            <Text style={styles.text(11.2, "500", colors.grey4)}>
+              {note.length > 20 ? `${note.substring(0, 20)}...` : note}
             </Text>
           )}
         </View>
       </View>
       <View style={{ justifyContent: "center" }}>
         <Text
-          style={{
-            fontSize: 18,
-            fontWeight: "bold",
-            color: isIncome ? "#3DA440" : "#DD2F30",
-          }}
+          style={styles.text(
+            18,
+            "bold",
+            isIncome ? colors.green3 : colors.red3
+          )}
         >
-          {isIncome ? "Rp " : "-Rp "}
-          {formattedAmount}
+          {isIncome ? "Rp " : "-Rp "} {formattedAmount}
         </Text>
       </View>
     </View>
@@ -134,13 +130,20 @@ export default function Transaction({
 }
 
 const styles = StyleSheet.create({
-  circle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+  circle: (color, size) => ({
+    width: size,
+    height: size,
+    backgroundColor: color,
+    borderRadius: size / 2,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#B0B0B0B2",
+    borderColor: colors.grey3,
     borderWidth: 1.2,
-  },
+    marginRight: 12,
+  }),
+  text: (size, weight, color) => ({
+    fontSize: size,
+    fontWeight: weight,
+    color: color,
+  }),
 });

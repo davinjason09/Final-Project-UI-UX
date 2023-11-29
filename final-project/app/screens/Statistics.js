@@ -10,10 +10,28 @@ import BudgetList from "../components/BudgetList";
 export default function Statistics() {
   const scrollViewRef = useRef();
 
-  const selectedMonth = useSelector((state) => state.initialMonth);
-  const selectedYear = useSelector((state) => state.initialYear);
+  const month = useSelector((state) => state.initialMonth);
+  const year = useSelector((state) => state.initialYear);
+  const data = useSelector((state) => state.monthlyData);
 
-  const series = [0, 0, 0, 0, 0, 1];
+  const series = (() => {
+    const monthData = data[year]?.[month];
+
+    if (!monthData) {
+      return [0, 0, 0, 0, 0, 1];
+    }
+
+    const spentValues = Object.values(monthData?.categories).map(
+      (category) => category.spent
+    );
+
+    if (spentValues.every((val) => val === 0)) {
+      return [...spentValues, 1]; // All spent values are 0, set the 6th element to 1
+    }
+
+    return [...spentValues, 0];
+  })();
+
   const sliceColor = [
     colors.blue,
     colors.orange,
@@ -42,11 +60,11 @@ export default function Statistics() {
           style={{ alignSelf: "center" }}
         />
         <View style={{ height: 13 }} />
-        <BudgetList stats type="Shopping" allocated={50000} spent={25000} />
-        <BudgetList stats type="Food" allocated={0} spent={0} />
-        <BudgetList stats type="Education" allocated={0} spent={0} />
-        <BudgetList stats type="Household" allocated={0} spent={0} />
-        <BudgetList stats type="Social" allocated={0} spent={0} />
+        <BudgetList stats type="Shopping" />
+        <BudgetList stats type="Food" />
+        <BudgetList stats type="Education" />
+        <BudgetList stats type="Household" />
+        <BudgetList stats type="Social" />
         <View style={{ height: 15 }} />
       </View>
     </ScrollView>

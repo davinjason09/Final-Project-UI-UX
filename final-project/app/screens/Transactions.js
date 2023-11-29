@@ -1,30 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { resetDate } from "../redux/actions";
+import { useFocusEffect } from "@react-navigation/native";
+import colors from "../utils/colors";
 
 import MonthYearTab from "../components/MonthYearTab";
-import Transaction from "../components/Transaction";
+import TransactionDetails from "../components/TransactionDetails";
 import EmptyListMessage from "../components/EmptyListMessage";
-import { resetDate } from "../redux/actions";
 
-export default function TransactionDetails() {
+export default function Transactions() {
   const dispatch = useDispatch();
+  const flatListRef = useRef();
+
   useEffect(() => {
     dispatch(resetDate(new Date().getMonth(), new Date().getFullYear()));
   }, []);
 
-  const transactions = useSelector((state) => state.transactions);
+  useFocusEffect(() => {
+    flatListRef.current?.scrollToOffset({ y: 0, animated: true });
+  });
 
+  const transactions = useSelector((state) => state.transactions);
   const selectedMonth = useSelector((state) => state.initialMonth);
   const selectedYear = useSelector((state) => state.initialYear);
-
-  console.log(selectedMonth, selectedYear);
 
   const groupedTransactions = groupTransactionsByDate(transactions);
 
   const renderItem = ({ item }) => (
     <View key={item.id} style={styles.transactionContainer}>
-      <Transaction {...item} />
+      <TransactionDetails {...item} />
     </View>
   );
 
@@ -54,22 +59,29 @@ export default function TransactionDetails() {
         }}
       >
         {filteredTransactions.length > 0 ? (
-          <View style={{ marginTop: 15 }}>
+          <View>
             <FlatList
+              ref={flatListRef}
               data={filteredTransactions}
               keyExtractor={(item) => item.date}
               showsVerticalScrollIndicator={false}
+              ItemSeparatorComponent={
+                <View style={{ height: 1, backgroundColor: colors.grey3 }} />
+              }
               renderItem={({ item }) => (
-                <View>
+                <View style={{ paddingBottom: 15 }}>
                   <Text
-                    style={{ fontWeight: 400, fontSize: 16, marginBottom: 15 }}
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 16,
+                      marginVertical: 15,
+                    }}
                   >
                     {formattedDate(item.date)}
                   </Text>
                   <FlatList
                     data={item.transactions}
                     keyExtractor={(item) => item.id.toString()}
-                    style={{ marginBottom: 15 }}
                     renderItem={renderItem}
                     ItemSeparatorComponent={<View style={{ height: 5 }} />}
                   />
@@ -104,13 +116,17 @@ const groupTransactionsByDate = (transactions) => {
 const styles = StyleSheet.create({
   base: {
     flex: 1,
-    backgroundColor: "#F7F8F9",
+    backgroundColor: colors.white2,
   },
   transactionContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     borderRadius: 20,
-    borderColor: "#B0B0B030",
+    borderColor: colors.grey3,
     borderWidth: 1,
     padding: 10,
+  },
+  line: {
+    height: 1,
+    backgroundColor: colors.grey3,
   },
 });

@@ -9,13 +9,13 @@ import {
   View,
 } from "react-native";
 import colors from "../utils/colors";
+import { useDispatch, useSelector } from "react-redux";
 
 import EditAmount from "./EditAmount";
+import { editCategory } from "../redux/actions";
 
 export default function BudgetList({
   type,
-  allocated,
-  spent,
   onPress,
   onClose,
   isVisible,
@@ -23,6 +23,28 @@ export default function BudgetList({
   config,
   stats,
 }) {
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.monthlyData);
+  const month = useSelector((state) => state.initialMonth);
+  const year = useSelector((state) => state.initialYear);
+
+  const allocated =
+    data && data[year] && data[year][month]
+      ? type === "User"
+        ? data[year][month].balance
+        : data[year][month].categories[type].allocated
+      : 0;
+  const spent =
+    data && data[year] && data[year][month]
+      ? type === "User"
+        ? data[year][month].spent
+        : data[year][month].categories[type].spent
+      : 0;
+
+  const totalSpent =
+    data && data[year] && data[year][month] ? data[year][month].spent : 0;
+
   const [amount, setAmount] = useState(allocated);
 
   const Icons = {
@@ -72,6 +94,14 @@ export default function BudgetList({
 
   const format = (value) => {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  };
+
+  const handleSave = () => {
+    console.log(month, year, type, amount);
+    const intAmount = parseInt(amount);
+    dispatch(editCategory(month, year, type, intAmount));
+
+    onClose();
   };
 
   return (
@@ -128,7 +158,10 @@ export default function BudgetList({
                       color: colors.white,
                     }}
                   >
-                    {spent / allocated ? (spent / allocated) * 100 : 0}%
+                    {spent && totalSpent
+                      ? +((spent / totalSpent) * 100).toFixed(2)
+                      : 0}
+                    %
                   </Text>
                 </View>
               </View>
@@ -139,7 +172,7 @@ export default function BudgetList({
               <View style={styles.progressBar}>
                 <View
                   style={{
-                    width: allocated / spent ? 150 * (spent / allocated) : 0,
+                    width: spent && allocated ? 150 * (spent / allocated) : 0,
                     height: 15,
                     borderRadius: 5,
                     backgroundColor: Icons[type].barColor,
@@ -164,30 +197,26 @@ export default function BudgetList({
         </View>
       </Pressable>
 
-      {config && (
-        <EditAmount isvisible={isVisible} onClose={onClose}>
-          <Text style={{ fontSize: 18, fontWeight: 700 }}>{type}</Text>
-          <TextInput
-            placeholder="Enter Amount"
-            placeholderTextColor={colors.grey2}
-            style={styles.textInput}
-            keyboardType="numeric"
-            value={amount ? amount.toString() : ""}
-            onChangeText={setAmount}
-          />
-          <TouchableOpacity
-            onPress={onClose}
-            style={styles.saveButton}
-            activeOpacity={0.5}
-          >
-            <Text
-              style={{ fontSize: 14, fontWeight: 700, color: colors.white }}
-            >
-              Save
-            </Text>
-          </TouchableOpacity>
-        </EditAmount>
-      )}
+      <EditAmount isvisible={isVisible} onClose={onClose}>
+        <Text style={{ fontSize: 18, fontWeight: 700 }}>{type}</Text>
+        <TextInput
+          placeholder="Enter Amount"
+          placeholderTextColor={colors.grey2}
+          style={styles.textInput}
+          keyboardType="numeric"
+          value={amount ? amount.toString() : ""}
+          onChangeText={setAmount}
+        />
+        <TouchableOpacity
+          onPress={handleSave}
+          style={styles.saveButton}
+          activeOpacity={0.5}
+        >
+          <Text style={{ fontSize: 14, fontWeight: 700, color: colors.white }}>
+            Save
+          </Text>
+        </TouchableOpacity>
+      </EditAmount>
     </View>
   );
 }

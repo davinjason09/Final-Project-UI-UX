@@ -16,11 +16,9 @@ export default function Budget() {
   const nav = useNavigation();
   const scrollViewRef = useRef();
 
-  const balance = useSelector((state) => state.balance);
-  const selectedMonth = useSelector((state) => state.initialMonth);
-  const selectedYear = useSelector((state) => state.initialYear);
-
-  // console.log(selectedMonth, selectedYear);
+  const month = useSelector((state) => state.initialMonth);
+  const year = useSelector((state) => state.initialYear);
+  const data = useSelector((state) => state.monthlyData);
 
   const format = (value) => {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
@@ -29,6 +27,9 @@ export default function Budget() {
   useFocusEffect(() => {
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
   });
+
+  const monthlyBalance =
+    data && data[year] && data[year][month] ? data[year][month].balance : 0;
 
   return (
     <View>
@@ -45,7 +46,7 @@ export default function Budget() {
                 Remaining (Monthly)
               </Text>
               <Text style={{ fontSize: 24, fontWeight: 700 }}>
-                Rp {format(balance)}
+                Rp {format(monthlyBalance)}
               </Text>
             </View>
             <TouchableOpacity
@@ -58,13 +59,13 @@ export default function Budget() {
             </TouchableOpacity>
           </View>
 
-          <BudgetList list type="User" allocated={balance} spent={0} />
+          <BudgetList list type="User" />
           <View style={{ height: 15 }} />
-          <BudgetList list type="Shopping" allocated={0} spent={0} />
-          <BudgetList list type="Food" allocated={0} spent={0} />
-          <BudgetList list type="Education" allocated={0} spent={0} />
-          <BudgetList list type="Household" allocated={0} spent={0} />
-          <BudgetList list type="Social" allocated={0} spent={0} />
+          <BudgetList list type="Shopping" />
+          <BudgetList list type="Food" />
+          <BudgetList list type="Education" />
+          <BudgetList list type="Household" />
+          <BudgetList list type="Social" />
           <View style={{ height: 15 }} />
         </View>
       </ScrollView>

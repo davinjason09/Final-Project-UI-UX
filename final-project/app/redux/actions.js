@@ -1,8 +1,3 @@
-export const addTransaction = (transaction) => ({
-  type: "ADD_TRANSACTION",
-  payload: transaction,
-});
-
 export const initUser = (username, password) => ({
   type: "INIT_USER",
   payload: { username, password },
@@ -26,4 +21,14 @@ export const resetDate = (month, year) => ({
 export const changeDate = (month, year) => ({
   type: "CHANGE_DATE",
   payload: { month, year },
+});
+
+export const addTransaction = (transaction) => ({
+  type: "ADD_TRANSACTION",
+  payload: transaction,
+});
+
+export const editCategory = (month, year, type, amount) => ({
+  type: "UPDATE_CATEGORY_ALLOCATION",
+  payload: { month, year, type, amount },
 });
