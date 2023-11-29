@@ -2,6 +2,8 @@ const initialState = {
   transactions: [],
   balance: 0,
   user: "admin",
+  initialMonth: new Date().getMonth(),
+  initialYear: new Date().getFullYear(),
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,6 +24,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case "RESET_DATE":
+      return {
+        ...state,
+        initialMonth: action.payload.month,
+        initialYear: action.payload.year,
+      };
+    case "CHANGE_DATE":
+      return {
+        ...state,
+        initialMonth: action.payload.month,
+        initialYear: action.payload.year,
       };
     default:
       return state;
