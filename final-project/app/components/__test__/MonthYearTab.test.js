@@ -12,7 +12,7 @@ describe("MonthYearTab", () => {
 
   beforeEach(() => {
     store = mockStore({
-      initialMonth: 11,
+      initialMonth: 10,
       initialYear: 2023,
     });
   });
@@ -27,7 +27,7 @@ describe("MonthYearTab", () => {
     fireEvent.press(getByTestId("prevButton"));
 
     const actions = store.getActions();
-    expect(actions).toEqual([changeDate(10, 2023)]);
+    expect(actions).toEqual([changeDate(9, 2023)]);
   });
 
   it("should handle next month correctly", () => {
@@ -40,6 +40,6 @@ describe("MonthYearTab", () => {
     fireEvent.press(getByTestId("nextButton"));
 
     const actions = store.getActions();
-    expect(actions).toEqual([changeDate(12, 2023)]);
+    expect(actions).toEqual([changeDate(11, 2023)]);
   });
 });
