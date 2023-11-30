@@ -5,13 +5,13 @@ import { Ionicons } from "@expo/vector-icons";
 export default function MonthYearPicker({ month, year, onPrev, onNext }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPrev}>
+      <TouchableOpacity onPress={onPrev} testID="prevButton">
         <Ionicons name="chevron-back" size={20} color="black" />
       </TouchableOpacity>
       <Text
         style={{ fontSize: 14, fontWeight: "bold" }}
       >{`${month} ${year}`}</Text>
-      <TouchableOpacity onPress={onNext}>
+      <TouchableOpacity onPress={onNext} testID="nextButton">
         <Ionicons name="chevron-forward" size={20} color="black" />
       </TouchableOpacity>
     </View>
