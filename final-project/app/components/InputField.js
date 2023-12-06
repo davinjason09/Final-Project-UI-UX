@@ -11,6 +11,7 @@ export default function InputField({
   maxLength,
   onChangeText,
   required,
+  testID,
 }) {
   return (
     <Pressable onPress={onPress}>
@@ -34,6 +35,7 @@ export default function InputField({
           value={value}
           maxLength={maxLength}
           onChangeText={onChangeText}
+          testID={testID}
         />
       </View>
     </Pressable>

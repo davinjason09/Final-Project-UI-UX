@@ -79,6 +79,7 @@ export default function AddIncome() {
           onPress={showDatePicker}
           editable={false}
           required
+          testID={"date"}
         />
         <InputField
           label="Account"
@@ -87,6 +88,7 @@ export default function AddIncome() {
           onPress={openModal}
           editable={false}
           required
+          testID={"account"}
         />
         <InputField
           label="Amount"
@@ -95,12 +97,14 @@ export default function AddIncome() {
           maxLength={12}
           onChangeText={setAmount}
           required
+          testID={"amount"}
         />
         <InputField
           label="Note"
           placeholder="Enter Note"
           maxLength={30}
           onChangeText={setNote}
+          testID={"note"}
         />
         <View style={{ height: 99 }} />
         <Buttons
