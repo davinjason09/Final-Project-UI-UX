@@ -8,6 +8,7 @@ export default function LoginField({
   label,
   secureTextEntry,
   onChangeText,
+  testID,
 }) {
   return (
     <View>
@@ -23,6 +24,7 @@ export default function LoginField({
           secureTextEntry={secureTextEntry}
           onChangeText={onChangeText}
           style={{ height: 52, flex: 1 }}
+          testID={testID}
         ></TextInput>
       </View>
     </View>

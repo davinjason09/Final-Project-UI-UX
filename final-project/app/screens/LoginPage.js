@@ -39,6 +39,7 @@ export default function LoginPage() {
           label="Username"
           icon="person-circle-outline"
           onChangeText={setUsername}
+          testID={"username"}
         />
         <View style={{ height: 23 }}></View>
         <LoginField
@@ -46,6 +47,7 @@ export default function LoginPage() {
           icon="key"
           secureTextEntry
           onChangeText={setPassword}
+          testID={"password"}
         />
       </View>
 
