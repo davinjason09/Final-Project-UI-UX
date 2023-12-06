@@ -42,4 +42,40 @@ describe("MonthYearTab", () => {
     const actions = store.getActions();
     expect(actions).toEqual([changeDate(11, 2023)]);
   });
+
+  it("should handle previous year correctly", () => {
+    store = mockStore({
+      initialMonth: 0,
+      initialYear: 2023,
+    });
+
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <MonthYearTab />
+      </Provider>
+    );
+
+    fireEvent.press(getByTestId("prevButton"));
+
+    const actions = store.getActions();
+    expect(actions).toEqual([changeDate(11, 2022)]);
+  });
+
+  it("should handle next year correctly", () => {
+    store = mockStore({
+      initialMonth: 11,
+      initialYear: 2023,
+    });
+
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <MonthYearTab />
+      </Provider>
+    );
+
+    fireEvent.press(getByTestId("nextButton"));
+
+    const actions = store.getActions();
+    expect(actions).toEqual([changeDate(0, 2024)]);
+  });
 });
